@@ -4,9 +4,15 @@ Rust Bare Metal Board Support Packages for ESP32 based boards with focus on Emba
 
 ## List of boards
 
-- [ESP32-S3-BOX](https://github.com/espressif/esp-box)
 - [ESP32-C6-DevKit-C1](https://docs.espressif.com/projects/espressif-esp-dev-kits/en/latest/esp32c6/esp32-c6-devkitc-1/index.html)
 - [M5Stack-CoreS3](https://shop.m5stack.com/products/m5stack-cores3-esp32s3-lotdevelopment-kit)
+
+### Older boards
+
+These boards are supported by the package, but it is not recommended to use them for new projects:
+
+- [ESP32-S3-BOX](https://github.com/espressif/esp-box) - HW discontinued - replaced by ESP32-S3-BOX-3
+
 
 ## Usage
 
@@ -17,7 +23,7 @@ cargo add esp-bsp
 ### Display configuration
 
 
-The configuration code for PINs intendet to be used at main function
+The configuration code for PINs intended to be used at main function
 ```rust
 use esp_bsp_rs::lcd_gpios;
 
@@ -61,3 +67,8 @@ esp32_s3_box = [ "esp32s3", "esp32s3-hal/opsram-8m" ]
 m5stack_cores3 = [ "esp32s3", "esp32s3-hal/psram-8m" ]
 ```
 
+## Change log
+
+### 0.2.0
+
+- renamed 

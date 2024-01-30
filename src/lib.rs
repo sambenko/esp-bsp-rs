@@ -1,9 +1,9 @@
 #![no_std]
 
 pub enum BoardType {
-    ESP32C3LcdKit,
+    ESP32C3LcdKit,      // HW was discontinued
     ESP32C6DevKitC1,
-    ESP32S3Box,
+    ESP32S3Box,         // HW was discontinued and replaced by ESP32-S3-BOX-3
     M5StackCoreS3,
     M5StackFire
 }
