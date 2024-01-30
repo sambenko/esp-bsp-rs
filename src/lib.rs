@@ -8,6 +8,34 @@ pub enum BoardType {
     M5StackFire
 }
 
+pub struct DisplayConfig {
+    pub h_res: u16,
+    pub v_res: u16,
+}
+
+impl DisplayConfig {
+    // Provide a default configuration
+    pub fn default() -> DisplayConfig {
+        DisplayConfig {
+            h_res: 320,
+            v_res: 240,
+        }
+    }
+
+    // Override for specific boards
+    pub fn for_board(board: BoardType) -> DisplayConfig {
+        match board {
+            BoardType::ESP32C3LcdKit => {
+                DisplayConfig {
+                    h_res: 240,
+                    v_res: 240,
+                }
+            }
+            _ => DisplayConfig::default(),
+        }
+    }
+}
+
 #[macro_export]
 macro_rules! lcd_gpios {
     (BoardType::ESP32C3LcdKit, $io:ident) => {
