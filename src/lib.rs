@@ -4,6 +4,7 @@ pub enum BoardType {
     ESP32C3LcdKit,      // HW was discontinued
     ESP32C6DevKitC1,
     ESP32S3Box,         // HW was discontinued and replaced by ESP32-S3-BOX-3
+    ESP32S3BoxLite,
     M5StackCoreS3,
     M5StackFire
 }
@@ -71,6 +72,17 @@ macro_rules! lcd_gpios {
             $io.pins.gpio48.into_push_pull_output()      // lcd_reset
         )
     };
+    (BoardType::ESP32S3BoxLite, $io:ident) => {
+        (
+            $io.pins.gpio7,     // lcd_sclk
+            $io.pins.gpio6,     // lcd_mosi
+            $io.pins.gpio5,    // lcd_cs
+            $io.pins.gpio19,     // lcd_miso
+            $io.pins.gpio4.into_push_pull_output(),    // lcd_dc
+            $io.pins.gpio45.into_push_pull_output(),     // lcd_backlight
+            $io.pins.gpio48.into_push_pull_output()      // lcd_reset
+        )
+    };
     (BoardType::M5StackCoreS3, $io:ident) => {
         (
             $io.pins.gpio36,    // lcd_sclk
@@ -111,6 +123,15 @@ macro_rules! define_display_type {
             GpioPin<Output<hal::gpio::PushPull>, 0>,
             hal::peripherals::SPI2, hal::gdma::Channel0, FullDuplexMode>,
             mipidsi::models::ILI9342CRgb565,
+            GpioPin<Output<hal::gpio::PushPull>,
+            48
+        >>
+    };
+    (BoardType::ESP32S3BoxLite) => {
+        mipidsi::Display<crate::display_interface_spi_dma::SPIInterface<'static, GpioPin<Output<hal::gpio::PushPull>, 4>,
+            GpioPin<Output<hal::gpio::PushPull>, 0>,
+            hal::peripherals::SPI2, hal::gdma::Channel0, FullDuplexMode>,
+            mipidsi::models::ST7789,
             GpioPin<Output<hal::gpio::PushPull>,
             48
         >>
